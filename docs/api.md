@@ -47,7 +47,7 @@ If the element is already open (it has `data('bPopup')`), calling `bPopup()` on 
 | `content` | `'ajax'` | How `loadUrl` is loaded: `'ajax'`, `'iframe'` or `'image'`. |
 | `contentContainer` | `false` | Selector or element that receives loaded content. Defaults to the popup itself. |
 | `easing` | `'swing'` | Easing for the slide transitions. |
-| `escClose` | `true` | Close on the Esc key. |
+| `escClose` | `true` | Close on the Esc key. The Esc `keydown` is stopped at `document` (`stopPropagation`), so `window` listeners do not receive it; other `document` handlers still run, and its default action is not prevented. With several popups open, Esc closes all of them. |
 | `follow` | `[true, true]` | `[x, y]`: keep the popup centered on that axis while the page scrolls or resizes. Disabled on iOS 6 because of a scroll event bug there. |
 | `followEasing` | `'swing'` | Easing for follow animations. |
 | `followSpeed` | `500` | Duration in ms of follow and reposition animations. |

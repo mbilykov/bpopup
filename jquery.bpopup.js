@@ -231,7 +231,8 @@
             }
             if (o.escClose) {
                 d.on('keydown.'+id, function(e) {
-                    if (e.which == 27) {  //escape
+                    if (e.which === 27) {
+                        e.stopPropagation();
                         close();
                     }
                 });

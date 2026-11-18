@@ -87,6 +87,7 @@ All options and methods are described in [docs/api.md](docs/api.md).
 ## CHANGELOG
 ### Unreleased ###
 * Changed: minimum jQuery version raised from 1.4.3 to 1.7. Deprecated/removed jQuery APIs replaced: `.bind/.unbind` and `.delegate/.undelegate` with `.on/.off`, `.load(handler)` on images with `.on('load', handler)`, `$.isFunction` with `typeof`. Works with jQuery 1.7 - 4.x without jQuery Migrate warnings.
+* Bugfix: the Esc `keydown` that closes the popup no longer bubbles past `document` to `window` (`stopPropagation`), so page-level key handlers (e.g. Elementor's) don't react to it.
 
 ### v 0.11.0 (01-24-2015)
 * Fixed [#7](https://github.com/dinbror/bpopup/issues/7) and [#21](https://github.com/dinbror/bpopup/issues/21). Using fallback width as default to fix the width issue when scrollbar visible.
