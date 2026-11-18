@@ -2,7 +2,7 @@
  * @name: bPopup
  * @type: jQuery
  * @author: (c) Bjoern Klinggaard - @bklinggaard
- * @version: 0.11.0
+ * @version: 0.12.0
  * @requires jQuery 1.7
  *==================================================================================================================*/
 ;(function($) {
