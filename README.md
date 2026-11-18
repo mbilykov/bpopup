@@ -9,7 +9,7 @@ See [docs/api.md](docs/api.md).
 bPopup is a lightweight jQuery modal popup plugin (only 1.34KB gzipped). It doesn't create or style your popup but provides you with all the logic like centering, modal overlay, events and more. It gives you a lot of opportunities to customize so it will fit your needs.
 
 ### HOW TO USE BPOPUP:
-Basic example that will bind a click event which will trigger bPopup when fired. Add a reference to the jQuery core lib (1.4.3 or newer) and bPopup:
+Basic example that will bind a click event which will trigger bPopup when fired. Add a reference to the jQuery core lib (1.7 or newer, up to 4.x) and bPopup:
 
 ```html
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/x.x.x/jquery.min.js"></script>
@@ -50,8 +50,7 @@ Basic example that will bind a click event which will trigger bPopup when fired.
     $(function() {
 
         // Binding a click event
-        // From jQuery v.1.7.0 use .on() instead of .bind()
-        $('#my-button').bind('click', function(e) {
+        $('#my-button').on('click', function(e) {
 
             // Prevents the default action to be triggered.
             e.preventDefault();
@@ -71,7 +70,7 @@ Or with custom settings
 ```javascript
 ;(function($) {
     $(function() {
-        $('#my-button').bind('click', function(e) {
+        $('#my-button').on('click', function(e) {
             e.preventDefault();
             $('#element_to_pop_up').bPopup({
                 appendTo: 'form'
@@ -86,6 +85,9 @@ Or with custom settings
 All options and methods are described in [docs/api.md](docs/api.md).
 
 ## CHANGELOG
+### Unreleased ###
+* Changed: minimum jQuery version raised from 1.4.3 to 1.7. Deprecated/removed jQuery APIs replaced: `.bind/.unbind` and `.delegate/.undelegate` with `.on/.off`, `.load(handler)` on images with `.on('load', handler)`, `$.isFunction` with `typeof`. Works with jQuery 1.7 - 4.x without jQuery Migrate warnings.
+
 ### v 0.11.0 (01-24-2015)
 * Fixed [#7](https://github.com/dinbror/bpopup/issues/7) and [#21](https://github.com/dinbror/bpopup/issues/21). Using fallback width as default to fix the width issue when scrollbar visible.
 * Fixed [#8](https://github.com/dinbror/bpopup/issues/8) and [#17](https://github.com/dinbror/bpopup/issues/17). "insideWindow" function updated so it now checks if height OR width is inside window instead of only width AND height.

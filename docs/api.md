@@ -4,7 +4,7 @@ bPopup turns an existing element into a modal popup. It does not create or style
 
 ## Requirements
 
-- jQuery >= 1.4.3. The plugin uses `.bind`, `.delegate`, `$.isFunction` and `.load(handler)`, so use jQuery 1.x or 2.x. jQuery 3+ is not supported.
+- jQuery >= 1.7 (the plugin uses `.on`/`.off`). Tested with jQuery 1.7, 1.12, 2.2, 3.7 and 4.0; it uses no deprecated jQuery APIs, so jQuery Migrate is not needed. The slim build is not supported: it lacks ajax and effects.
 - The popup element should be hidden by your CSS (for example `display: none`). bPopup shows it on open and hides it on close.
 
 ## Basic usage

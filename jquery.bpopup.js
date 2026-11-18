@@ -2,16 +2,15 @@
  * @name: bPopup
  * @type: jQuery
  * @author: (c) Bjoern Klinggaard - @bklinggaard
- * @demo: http://dinbror.dk/bpopup
  * @version: 0.11.0
- * @requires jQuery 1.4.3
+ * @requires jQuery 1.7
  *==================================================================================================================*/
 ;(function($) {
 	'use strict';
 	
     $.fn.bPopup = function(options, callback) {
         
-    	if ($.isFunction(options)) {
+    	if (typeof options === 'function') {
             callback 		= options;
             options 		= null;
         }
@@ -87,7 +86,7 @@
 				case ('image'):
 					open();
 					$('<img />')
-						.load(function() {
+						.on('load', function() {
 						    triggerCall(o.loadCallback);
 							recenter($(this));
 					    }).attr('src', o.loadUrl).hide().appendTo(o.contentContainer);
@@ -206,16 +205,16 @@
 		
         function bindEvents() {
             $w.data('bPopup', popups);
-			$popup.delegate('.bClose, .' + o.closeClass, 'click.'+id, close); // legacy, still supporting the close class bClose
+			$popup.on('click.'+id, '.bClose, .' + o.closeClass, close); // legacy, still supporting the close class bClose
             
             if (o.modalClose) {
-                $('.b-modal.'+id).css('cursor', 'pointer').bind('click', close);
+                $('.b-modal.'+id).css('cursor', 'pointer').on('click', close);
             }
 			
 			// Temporary disabling scroll/resize events on devices with IOS6+
 			// due to a bug where events are dropped after pinch to zoom
             if (!isIOS6X && (o.follow[0] || o.follow[1])) {
-               $w.bind('scroll.'+id, function() {
+               $w.on('scroll.'+id, function() {
                 	if(inside.x || inside.y){
 						var css = {};
 						if(inside.x)
@@ -226,12 +225,12 @@
                         	.dequeue()
                             .animate(css, o.followSpeed, o.followEasing);
 					 }  
-            	}).bind('resize.'+id, function() {
+            	}).on('resize.'+id, function() {
 		            reposition();
                 });
             }
             if (o.escClose) {
-                d.bind('keydown.'+id, function(e) {
+                d.on('keydown.'+id, function(e) {
                     if (e.which == 27) {  //escape
                         close();
                     }
@@ -243,10 +242,10 @@
             if (!o.scrollBar) {
                 $('html').css('overflow', 'auto');
             }
-            $('.b-modal.'+id).unbind('click');
-            d.unbind('keydown.'+id);
-            $w.unbind('.'+id).data('bPopup', ($w.data('bPopup')-1 > 0) ? $w.data('bPopup')-1 : null);
-            $popup.undelegate('.bClose, .' + o.closeClass, 'click.'+id, close).data('bPopup', null);
+            $('.b-modal.'+id).off('click');
+            d.off('keydown.'+id);
+            $w.off('.'+id).data('bPopup', ($w.data('bPopup')-1 > 0) ? $w.data('bPopup')-1 : null);
+            $popup.off('click.'+id, '.bClose, .' + o.closeClass, close).data('bPopup', null);
         };
 		
 		function doTransition(open) {
@@ -310,7 +309,7 @@
 		};
 		
 		function triggerCall(func, arg) {
-			$.isFunction(func) && func.call($popup, arg);
+			typeof func === 'function' && func.call($popup, arg);
 		};
 		
        	function calcPosition(){
